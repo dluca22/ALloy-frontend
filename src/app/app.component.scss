@@ -1,3 +1,10 @@
-.this-h1{
-    background-color: pink;
+.body-content{
+    display: flex;
+    height: 90vh;
+
+    main{
+        display: flex;
+        flex:1;
+        padding:5px;
+    }
 }
