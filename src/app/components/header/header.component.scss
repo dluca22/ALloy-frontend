@@ -1,0 +1,23 @@
+@import '../../../variables';
+
+.navbar{
+    background-color: $base;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    h1{
+        color:white;
+        width: 150px;
+        text-align: end;
+        background-color: transparent;
+    }
+    a {
+        text-decoration: none;
+        &:link,
+        &:visited,
+        &:active {
+          text-decoration: none;
+        }
+      }
+
+}
