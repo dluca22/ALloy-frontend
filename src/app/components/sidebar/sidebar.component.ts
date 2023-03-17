@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Machine } from 'src/app/Machine';
 import { ListService } from 'src/app/services/list.service';
+import { Machine } from 'src/app/Machine';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +15,14 @@ export class SidebarComponent  implements OnInit {
   ngOnInit(): void {
     console.log("init machine list")
     // on initializing calls this listService method imported from list.service
-    this.listService.getMachineList()
+    this.listService.getMachineList().subscribe( data => {
+      console.log("qua i dati", data);
+      this.machines = data;
+    },
+    error => {
+      console.log("errore", error);
+
+    } )
   }
 
 }
