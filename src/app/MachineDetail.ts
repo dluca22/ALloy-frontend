@@ -1,3 +1,5 @@
+// interface that describe the structure of data to recieve from backend for the specific machine data
+
 export interface MachineDetail {
     id:number,
     name:string,
