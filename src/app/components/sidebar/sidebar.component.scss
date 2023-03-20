@@ -6,4 +6,25 @@ aside{
     height: 100vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 10rem;
 }
+
+.section-title{
+    margin:10px 1px;
+    padding:3px 3px;
+    border-bottom: 2px solid black;
+}
+ul{
+    padding: 0;
+}
+.machine-status-group{
+    height:100px;
+}
+
+
+.machine-status-check{
+    font-size: 20pt;
+
+}
+
