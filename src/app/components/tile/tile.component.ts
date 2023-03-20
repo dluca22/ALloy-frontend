@@ -13,17 +13,13 @@ import { ListService } from 'src/app/services/list.service';
   styleUrls: ['./tile.component.scss']
 })
 export class TileComponent implements OnInit {
-  machineDetail!: any
-  @Input() id!:number;
-  constructor(private listService: ListService){}
+  machineDetail!: Observable<MachineDetail>;
+  @Input() id!: number;
+  constructor(private listService: ListService) { }
 
-  ngOnInit(): void{
-    // this.machineDetail = this.listService.getMachineDetail(this.id)
-    this.listService.getMachineDetail(8).subscribe( (data: any) => {
-      console.log("qua i dati", data);
-      this.machineDetail = data;
-    })
-    console.log("sono qui", this.machineDetail)
+  ngOnInit(): void {
+    this.machineDetail = this.listService.getMachineDetail(this.id)
+    // to console.log an observable we have so subscribe to it, then use a callback function
+    console.log(this.machineDetail.subscribe(value => console.log(value.id)))
   }
-
 }

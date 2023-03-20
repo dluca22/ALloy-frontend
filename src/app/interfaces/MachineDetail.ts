@@ -7,8 +7,8 @@ export interface MachineDetail {
     online:number,
     min_temp:number,
     max_temp:number,
-    min_pressure:number,
-    max_pressure:number,
+    min_pressure:number | null,
+    max_pressure:number | null,
     flow_rate:number,
     flow_rate_unit:string
 }
