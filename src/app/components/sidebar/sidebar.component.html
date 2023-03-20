@@ -1,10 +1,14 @@
 
 <!-- this should be the component that hosts the list of data from the different endpoints of the app -->
 <!-- ideally generates 3 different lists with the content of each table of the database & generating <li> components with <a href to the `/:id` specific route to have its dashboard as a popup (maybe?) -->
+<aside>
 
-<h5>List of machines</h5>
-<ul>
-    <app-machines-list></app-machines-list>
-    <app-machines-list></app-machines-list>
-    <app-machines-list></app-machines-list>
-</ul>
+    <h5>List of machines</h5>
+    <ul *ngFor="let machine of machines | async">
+        <div>
+            <span>{{machine.name}} </span> <span>{{machine.online === 1 ? "online" : "offline"}}</span>
+        </div>
+
+
+    </ul>
+</aside>
