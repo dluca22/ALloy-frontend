@@ -15,6 +15,8 @@ import { MachineDetail } from '../interfaces/MachineDetail';
 })
 export class ListService {
   private machineListUrl = 'http://localhost:3000/machines'
+  
+
   constructor(private http: HttpClient) {}
 
   getMachineList(): Observable<Machine[]> {

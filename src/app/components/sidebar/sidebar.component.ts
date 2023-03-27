@@ -15,13 +15,13 @@ import { Machine } from 'src/app/interfaces/Machine';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent  implements OnInit {
-  machines!: Observable<Machine[]>;
+  machines?: Machine[] | [];
 
   constructor(private listService: ListService) {}
 
   ngOnInit(): void {
     // on initializing calls this listService method imported from list.service
-    this.machines = this.listService.getMachineList()
+    this.listService.getMachineList().subscribe(list => this.machines = list)
   }
 
 }
