@@ -1,15 +1,28 @@
-
 <!--  general tile structure -->
 
-<div class="tile-container">
-    <div id="id">{{machineDetail.id }}</div>
-    <div>specs
-    </div>
+<div class="tile-container" *ngIf="machineDetail">
     <div>
-        <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-        </ul>
+        <!-- <span>temp: </span> <span>{{machineDetail.name}}</span> -->
+        <h4>specs</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of machineDetail | keyvalue">
+
+                    <!--  testing conditionals to filter out id and machine_id from table [for testing] -->
+                    <ng-container *ngIf="!['id', 'machine_id'].includes(item.key)">
+                        <td class="key-column">{{item.key}}</td>
+                        <td class="values-column">{{item.value}}</td>
+                    </ng-container>
+                </tr>
+
+
+            </tbody>
+        </table>
     </div>
 </div>
