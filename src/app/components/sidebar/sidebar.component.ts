@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ListService } from 'src/app/services/list.service';
 import { Machine } from 'src/app/interfaces/Machine';
@@ -14,14 +14,16 @@ import { Machine } from 'src/app/interfaces/Machine';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent  implements OnInit {
-  machineList!: Machine[] | [];
+export class SidebarComponent {
+  // machineList!: Machine[] | [];
+
+  @Input() machineList!:Machine[]
 
   constructor(private listService: ListService) {}
 
-  ngOnInit(): void {
-    // on initializing calls this listService method imported from list.service
-  this.listService.getMachineList().subscribe(result => this.machineList = result)
-  }
+  // ngOnInit(): void {
+  //   // on initializing calls this listService method imported from list.service
+  // this.listService.getMachineList().subscribe(result => this.machineList = result)
+  // }
 
 }

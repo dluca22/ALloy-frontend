@@ -13,7 +13,6 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.listService.getMachineList().subscribe(result => this.machineList = result)
 
-
   }
 
   constructor(private listService: ListService){
