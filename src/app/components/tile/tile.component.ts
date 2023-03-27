@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Machine } from 'src/app/interfaces/Machine';
 import { MachineDetail } from 'src/app/interfaces/MachineDetail';
 import { ListService } from 'src/app/services/list.service';
 
@@ -14,12 +15,13 @@ import { ListService } from 'src/app/services/list.service';
 })
 export class TileComponent implements OnInit {
   machineDetail?: MachineDetail;
+  machineList?:Machine[]
 
   @Input() id!: number;
   constructor(private listService: ListService) { }
 
   ngOnInit(): void {
-
+    
     // this.listService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
     this.listService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine

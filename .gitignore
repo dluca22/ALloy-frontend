@@ -40,3 +40,4 @@ testem.log
 .DS_Store
 Thumbs.db
 ORIG_README.md
+src/app/services/service_notes.md

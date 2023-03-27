@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Machine } from '../interfaces/Machine';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { MachineDetail } from '../interfaces/MachineDetail';
 
 // interface that describe the structure of data to recieve from backend for the specific machine data
@@ -15,14 +16,22 @@ import { MachineDetail } from '../interfaces/MachineDetail';
 })
 export class ListService {
   private machineListUrl = 'http://localhost:3000/machines'
-  
+  private machineList: Machine[] = []
 
-  constructor(private http: HttpClient) {}
 
   getMachineList(): Observable<Machine[]> {
-    return this.http.get<Machine[]>(this.machineListUrl);
+    if(this.machineList.length === 0){
+      return this.http.get<Machine[]>(this.machineListUrl)
+      .pipe(map(machines => {
+        this.machineList = machines;
+        return this.machineList
+      }))
+    }
+    return of(this.machineList)
+
   }
   getMachineDetail(id:number): Observable<MachineDetail> {
     return this.http.get<MachineDetail>(this.machineListUrl +`/${id}`);
   }
+  constructor(private http: HttpClient) {}
 }
