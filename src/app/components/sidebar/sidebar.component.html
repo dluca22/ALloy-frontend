@@ -3,23 +3,30 @@
 <aside>
     <section class="machines-section">
         <h3 class="section-title">List of machines</h3>
+        <ng-container *ngIf="machineList; else errorBlock">
         <div class="machine-status-group">
-            <h5>Online</h5>
-            <ul *ngFor="let machine of machineList">
 
-                <ng-container *ngIf="machine.online ">
-                    <li>{{machine.name}} </li>
-                </ng-container>
-            </ul>
-        </div>
-        <div class="machine-status-group">
-            <h5>Offline</h5>
-            <ul *ngFor="let machine of machineList">
-                <ng-container *ngIf="!machine.online">
-                    <li>{{machine.name}} </li>
+                <h5>Online</h5>
+                <ul *ngFor="let machine of machineList">
 
-                </ng-container>
-            </ul>
-        </div>
+                    <ng-container *ngIf="machine.online ">
+                        <li>{{machine.name}} </li>
+                    </ng-container>
+                </ul>
+            </div>
+            <div class="machine-status-group">
+                <h5>Offline</h5>
+                <ul *ngFor="let machine of machineList">
+                    <ng-container *ngIf="!machine.online">
+                        <li>{{machine.name}} </li>
+
+                    </ng-container>
+                </ul>
+            </div>
+        </ng-container>
+
+        <ng-template #errorBlock>
+            <h3>The backend service seems Offline</h3>
+        </ng-template>
     </section>
 </aside>

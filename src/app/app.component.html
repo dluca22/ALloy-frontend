@@ -7,10 +7,17 @@
 <div class="body-content">
     <app-sidebar [machineList]="machineList"></app-sidebar>
     <main>
-        <div class="machined-detail-area">
-            <ng-container *ngFor="let machine of machineList">
-                <app-tile [id]="machine.id"></app-tile>
+        <div class="machine-detail-area">
+            <ng-container *ngIf="machineList; else errorBlock">
+
+                <ng-container *ngFor="let machine of machineList">
+                    <app-tile [id]="machine.id"></app-tile>
+                </ng-container>
             </ng-container>
+
+            <ng-template #errorBlock>
+                <h2> The backend service seems Offline</h2>
+            </ng-template>
         </div>
         <router-outlet></router-outlet>
     </main>
