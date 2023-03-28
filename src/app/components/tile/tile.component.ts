@@ -21,11 +21,11 @@ export class TileComponent implements OnInit {
   constructor(private listService: ListService) { }
 
   ngOnInit(): void {
-    
+
     // this.listService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
     this.listService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine
-      console.log("log", Object.keys(this.machineDetail))
+      // console.log("log", Object.keys(this.machineDetail))
     })
   }
 }

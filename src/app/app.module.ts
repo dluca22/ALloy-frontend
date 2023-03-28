@@ -9,6 +9,14 @@ import { TileComponent } from './components/tile/tile.component';
 import { MachinesListComponent } from './components/machines-list/machines-list.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 
+// moved socket module declaration from docks to separate .ts file imported down here
+// import { MySocketIoModule } from './app-socket.module';
+// module for sockets
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:3000', options: {} };
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +28,8 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    SocketIoModule.forRoot(config)
   ],
   providers: [],
   bootstrap: [AppComponent]

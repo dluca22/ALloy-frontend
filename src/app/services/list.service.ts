@@ -20,18 +20,21 @@ export class ListService {
 
 
   getMachineList(): Observable<Machine[]> {
-    if(this.machineList.length === 0){
+    if (this.machineList.length === 0) {
       return this.http.get<Machine[]>(this.machineListUrl)
-      .pipe(map(machines => {
-        this.machineList = machines;
-        return this.machineList
-      }))
+        .pipe(map(machines => {
+          this.machineList = machines;
+          return this.machineList
+        }))
     }
     return of(this.machineList)
 
   }
-  getMachineDetail(id:number): Observable<MachineDetail> {
-    return this.http.get<MachineDetail>(this.machineListUrl +`/${id}`);
+  getMachineDetail(id: number): Observable<MachineDetail> {
+    return this.http.get<MachineDetail>(this.machineListUrl + `/${id}`);
   }
-  constructor(private http: HttpClient) {}
+
+  
+
+  constructor(private http: HttpClient) { }
 }
