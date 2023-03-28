@@ -5,6 +5,8 @@ import { Machine } from './interfaces/Machine';
 // socket import in component
 import { Socket } from 'ngx-socket-io';
 
+// from https://deepinder.me/creating-a-real-time-app-with-angular-8-and-socket-io-with-nodejs
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,7 +20,6 @@ export class AppComponent implements OnInit {
     this.listService.getMachineList().subscribe(result => this.machineList = result)
     console.log("questo è oninit block")
 
-    this.socket.connect()
     this.socket.on('connect', () => {
       console.log('Socket connected with id:', this.socket.ioSocket.id);
       this.socket.emit('message', 'some data');
