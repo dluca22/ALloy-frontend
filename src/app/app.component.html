@@ -7,7 +7,9 @@
 <div class="body-content">
     <app-sidebar [machineList]="machineList"></app-sidebar>
     <main>
+        <h2>randomNum data from socket:  {{socketData}}</h2>
         <div class="machine-detail-area">
+
             <ng-container *ngIf="machineList; else errorBlock">
 
                 <ng-container *ngFor="let machine of machineList">

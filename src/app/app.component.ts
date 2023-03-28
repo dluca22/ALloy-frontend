@@ -24,7 +24,8 @@ export class AppComponent implements OnInit {
       this.socket.emit('message', 'some data');
     });
 
-    this.socket.on('data', () => console.log('dati ricevuti'));
+
+    this.socket.on('data', (data: any) => this.socketData = data.randomNum);
 
   }
 
