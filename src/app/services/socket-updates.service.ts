@@ -11,7 +11,7 @@ export class SocketUpdatesService {
 
   constructor(private socket: Socket) {}
 
-  getMessage() {
+  getData() {
     return this.socket.fromEvent('data').pipe(map((data:any) => data.randomNum));
   }
 }

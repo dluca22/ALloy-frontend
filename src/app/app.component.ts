@@ -24,9 +24,10 @@ export class AppComponent implements OnInit {
 
 
 
-    this.socket.on('data', (data:any) => {this.socketData = data.randomNum as string});
-    this.socketUpdateService.getMessage().subscribe(data => {
+    // this.socket.on('data', (data:any) => {this.socketData = data.randomNum as string});
+    this.socketUpdateService.getData().subscribe(data => {
       console.log('Data received:', data);
+      this.socketData = data
     });
 
 
