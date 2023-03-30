@@ -18,19 +18,16 @@ export class AppComponent implements OnInit {
   socketData?: string;
   altro?: number | string
 
+
   ngOnInit(): void {
     this.listService.getMachineList().subscribe(result => this.machineList = result)
-    console.log("questo è oninit block")
-
 
 
     // this.socket.on('data', (data:any) => {this.socketData = data.randomNum as string});
-    this.socketUpdateService.getData().subscribe(data => {
-      console.log('Data received:', data);
-      this.socketData = data
-    });
-
-
+    // this.socketUpdateService.getData().subscribe(data => {
+    //   console.log('Data received:', data);
+    //   this.socketData = data
+    // });
   }
 
   constructor(private listService: ListService, private socket: Socket, private socketUpdateService: SocketUpdatesService) { }

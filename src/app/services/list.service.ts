@@ -34,7 +34,7 @@ export class ListService {
     return this.http.get<MachineDetail>(this.machineListUrl + `/${id}`);
   }
 
-  
+
 
 
   constructor(private http: HttpClient) { }
