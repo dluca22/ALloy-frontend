@@ -25,10 +25,8 @@ export class TileComponent implements OnInit {
   @Input() id!: number;   // receive id from parent component (app.component).
 
   getLiveStatistics(machineName :string): void{
-    // console.log(machineName)
     if(this.machineDetail){
-      this.socketUpdateService.getTemperature(machineName).subscribe(result => {
-        this.machineTemperature = result.temperature})
+      this.socketUpdateService.getLiveData(machineName).subscribe(result => console.log("qwaaa", result))
       }
   }
 

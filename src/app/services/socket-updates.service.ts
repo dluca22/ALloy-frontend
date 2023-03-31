@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { Observable, map } from 'rxjs';
+import { Observable, fromEvent, map, tap } from 'rxjs';
 
 
 interface temperatureData {
-  name:string,
-  temperature:number
+  name: string,
+  temperature: number
 }
 
 @Injectable({
@@ -14,18 +14,23 @@ interface temperatureData {
 export class SocketUpdatesService {
 
 
-  constructor(private socket: Socket) {}
+  constructor(private socket: Socket) { }
 
   // getData() {
   //   return this.socket.fromEvent('data').pipe(map((data:any) => data.randomNum));
   // }
 
-  getTemperature(name: string): Observable<temperatureData> {
-    // console.log(name)
-    console.log("chiamato")
-    return this.socket.fromEvent('temperatureUpdate').pipe(
-      map((data:any) => data.find(
-        (m:any) => m.name === name)));
+  getLiveData(name: string): Observable<temperatureData> {
+    console.log("chiamato", name)
+
+    // return this.socket.fromEvent(name).pipe(
+    //   map((data: any) => data));
+
+
+    return this.socket.fromEvent(name).pipe(
+      tap((data) => console.log(`Data received from socket: ${JSON.stringify(data)}`)),
+      map((data: any) => data)
+    );
   }
 
 
