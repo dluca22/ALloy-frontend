@@ -23,7 +23,8 @@ export class TileComponent implements OnInit {
   //  machine list gets called once then creates a loop of component passing id which will be used to get machineDetail from service
   @Input() id!: number;   // receive id from parent component (app.component).
 
-  toggleOnline(){
+  toggleOnline(id:number){
+
 
   }
 
@@ -34,7 +35,7 @@ export class TileComponent implements OnInit {
         this.machinePressure = result.pressure;
         this.machineFlowRate = result.flow_rate;
       })
-      }
+    }
   }
 
 
@@ -42,6 +43,7 @@ export class TileComponent implements OnInit {
     // this.machinesService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
     this.machinesService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine
+      console.log(this.machineDetail)
       this.getLiveStatistics(this.machineDetail.name)
     })
 

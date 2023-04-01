@@ -4,10 +4,10 @@
         <h2>{{machineDetail.name | titlecase}}</h2>
 
         <ng-container *ngIf="machineDetail.online; else turnOnButton">
-            <button (click)="toggleOnline()">Off</button>
+            <button (click)="toggleOnline(machineDetail.machine_id)">Off</button>
         </ng-container>
         <ng-template #turnOnButton>
-            <button (click)="toggleOnline()">On</button>
+            <button (click)="toggleOnline(machineDetail.machine_id)">On</button>
         </ng-template>
 
 
