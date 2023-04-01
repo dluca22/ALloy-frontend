@@ -2,6 +2,17 @@
 
 <div class="tile-container" *ngIf="machineDetail">
         <h2>{{machineDetail.name | titlecase}}</h2>
+
+        <ng-container *ngIf="machineDetail.online; else turnOnButton">
+            <button (click)="toggleOnline()">Off</button>
+        </ng-container>
+        <ng-template #turnOnButton>
+            <button (click)="toggleOnline()">On</button>
+        </ng-template>
+
+
+
+
         <!-- create a table with title key | value, the rows iterating values filtered -->
         <table>
             <thead>

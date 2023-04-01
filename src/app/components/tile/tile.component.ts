@@ -23,6 +23,10 @@ export class TileComponent implements OnInit {
   //  machine list gets called once then creates a loop of component passing id which will be used to get machineDetail from service
   @Input() id!: number;   // receive id from parent component (app.component).
 
+  toggleOnline(){
+    
+  }
+
   getLiveStatistics(machineName :string): void{
     if(this.machineDetail){
       this.socketUpdateService.getLiveData(machineName).subscribe(result => {
