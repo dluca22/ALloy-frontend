@@ -7,10 +7,7 @@ import { SocketUpdatesService } from 'src/app/services/socket-updates.service';
 
 // this should be the tile in the main part of the app, where the complete data of EACH machine or sector would be displayed in a tile configuration
 // OR just having tiles for general stats of the facility and have specifics for each of them in separate routes
-interface TemperatureData {
-  name: string,
-  temperature: number
-}
+
 
 @Component({
   selector: 'app-tile',

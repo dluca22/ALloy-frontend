@@ -1,31 +1,38 @@
 <!--  general tile structure -->
 
 <div class="tile-container" *ngIf="machineDetail">
-    <div>
-        <h4>specs</h4>
+        <h2>{{machineDetail.name | titlecase}}</h2>
         <!-- create a table with title key | value, the rows iterating values filtered -->
         <table>
             <thead>
                 <tr>
-                    <th>Key</th>
-                    <th>Value</th>
+                    <th>Valori</th>
+                    <th>Dati live</th>
+                    <th>Target</th>
+                    <th>Unità</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let item of machineDetail | keyvalue">
-
-                    <!--  testing conditionals to filter out id and machine_id from table [for testing] -->
-                    <ng-container *ngIf="!['id', 'machine_id'].includes(item.key)">
-                        <td class="key-column">{{item.key}}</td>
-                        <td class="values-column">{{item.value}}</td>
-                    </ng-container>
+                <tr>
+                    <td class="row-title">Pressione</td>
+                    <td class="live-data-column">{{machinePressure}}</td>
+                    <td class="target-value-column">{{machineDetail.min_pressure}} ~ {{machineDetail.max_pressure}}</td>
+                    <td class="unit-column">{{machineDetail.pressure_unit}}</td>
                 </tr>
-
+                <tr>
+                    <td class="row-title">Temperatura</td>
+                    <td class="live-data-column">{{machineTemperature}}</td>
+                    <td class="target-value-column">{{machineDetail.min_temp}} ~ {{machineDetail.max_temp}}</td>
+                    <td class="unit-column">°C</td>
+                </tr>
+                <tr>
+                    <td class="row-title">Flow Rate</td>
+                    <td class="live-data-column">{{machineFlowRate}}</td>
+                    <td class="target-value-column">{{machineDetail.flow_rate}}</td>
+                    <td class="unit-column">{{machineDetail.flow_rate_unit}}</td>
+                </tr>
 
             </tbody>
         </table>
-        <div>current Temperature: {{machineTemperature}}</div>
-        <div>current Pressure: {{machinePressure}}</div>
-        <div>current Flow Rate: {{machineFlowRate}}</div>
-    </div>
+
 </div>
