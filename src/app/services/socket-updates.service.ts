@@ -3,9 +3,11 @@ import { Socket } from 'ngx-socket-io';
 import { Observable, fromEvent, map, tap } from 'rxjs';
 
 
-interface temperatureData {
+interface MachineLiveData {
   name: string,
-  temperature: number
+  temperature: number,
+  pressure: number,
+  flow_rate: number,
 }
 
 @Injectable({
@@ -20,7 +22,7 @@ export class SocketUpdatesService {
   //   return this.socket.fromEvent('data').pipe(map((data:any) => data.randomNum));
   // }
 
-  getLiveData(name: string): Observable<temperatureData> {
+  getLiveData(name: string): Observable<MachineLiveData> {
     console.log("chiamato", name)
 
     // return this.socket.fromEvent(name).pipe(
