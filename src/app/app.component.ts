@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ListService } from './services/list.service';
+import { MachinesService } from './services/machines.service';
 import { Machine } from './interfaces/Machine';
 
 // socket import in component
@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.listService.getMachineList().subscribe(result => this.machineList = result)
+    this.machinesService.getMachineList().subscribe(result => this.machineList = result)
 
 
     // this.socket.on('data', (data:any) => {this.socketData = data.randomNum as string});
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     // });
   }
 
-  constructor(private listService: ListService, private socket: Socket, private socketUpdateService: SocketUpdatesService) { }
+  constructor(private machinesService: MachinesService, private socket: Socket, private socketUpdateService: SocketUpdatesService) { }
 
 
 }

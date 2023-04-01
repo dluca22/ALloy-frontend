@@ -14,7 +14,7 @@ import { MachineDetail } from '../interfaces/MachineDetail';
 @Injectable({
   providedIn: 'root'
 })
-export class ListService {
+export class MachinesService {
   private machineListUrl = 'http://localhost:3000/machines'
   private machineList: Machine[] = []
 

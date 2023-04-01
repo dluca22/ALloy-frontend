@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListService } from 'src/app/services/list.service';
+import { MachinesService } from 'src/app/services/machines.service';
 import { Machine } from 'src/app/interfaces/Machine';
 
 // this is the sidebar in the main part of the page, where I think i want to add the 3 lists of sections of the page
 // right now it will be fetching the data from "/machines" endpoint, getting back all the entries in the `machines` table of the database, via the `/machines` endpoint from Node
 
-// uses ListService.ts as a service to fetch to the backend
+// uses MachinesService.ts as a service to fetch to the backend
 
 
 @Component({
@@ -19,11 +19,11 @@ export class SidebarComponent {
 
   @Input() machineList!:Machine[]
 
-  constructor(private listService: ListService) {}
+  constructor(private machinesService: MachinesService) {}
 
   // ngOnInit(): void {
-  //   // on initializing calls this listService method imported from list.service
-  // this.listService.getMachineList().subscribe(result => this.machineList = result)
+  //   // on initializing calls this machinesService method imported from machines.service
+  // this.machinesService.getMachineList().subscribe(result => this.machineList = result)
   // }
 
 }

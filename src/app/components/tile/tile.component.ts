@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } fro
 import { Observable } from 'rxjs';
 import { Machine } from 'src/app/interfaces/Machine';
 import { MachineDetail } from 'src/app/interfaces/MachineDetail';
-import { ListService } from 'src/app/services/list.service';
+import { MachinesService } from 'src/app/services/machines.service';
 import { SocketUpdatesService } from 'src/app/services/socket-updates.service';
 
 // this should be the tile in the main part of the app, where the complete data of EACH machine or sector would be displayed in a tile configuration
@@ -24,7 +24,7 @@ export class TileComponent implements OnInit {
   @Input() id!: number;   // receive id from parent component (app.component).
 
   toggleOnline(){
-    
+
   }
 
   getLiveStatistics(machineName :string): void{
@@ -39,8 +39,8 @@ export class TileComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.listService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
-    this.listService.getMachineDetail(this.id).subscribe(machine => {
+    // this.machinesService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
+    this.machinesService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine
       this.getLiveStatistics(this.machineDetail.name)
     })
@@ -48,5 +48,5 @@ export class TileComponent implements OnInit {
 
 
   }
-  constructor(private listService: ListService, private socketUpdateService: SocketUpdatesService) { }
+  constructor(private machinesService: MachinesService, private socketUpdateService: SocketUpdatesService) { }
 }
