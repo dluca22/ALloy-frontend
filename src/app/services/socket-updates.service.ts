@@ -15,25 +15,22 @@ interface MachineLiveData {
 })
 export class SocketUpdatesService {
 
-
   constructor(private socket: Socket) { }
 
-  // getData() {
-  //   return this.socket.fromEvent('data').pipe(map((data:any) => data.randomNum));
-  // }
-
   getLiveData(name: string): Observable<MachineLiveData> {
-    console.log("chiamato", name)
 
-    // return this.socket.fromEvent(name).pipe(
-    //   map((data: any) => data));
-
-
-    return this.socket.fromEvent(name).pipe(
-      tap((data) => console.log(`Data received from socket: ${JSON.stringify(data)}`)),
-      map((data: any) => data)
+    // inferring data type into the fromEvent operator so pipe and map can know 
+    return this.socket.fromEvent<MachineLiveData>(name).pipe(
+      map((data) => data)
     );
+
+    // ==== THIS is without using type annotation ====
+        // return this.socket.fromEvent(name).pipe(map((data:any) => data));
+
+    //  ==== THIS .tap() used to "tap" into observable to log results while they get passed on ====
+        // return this.socket.fromEvent(name).pipe(
+        //   tap((data) => console.log(`Data received from socket: ${JSON.stringify(data)}`)),
+        //   map((data: any) => data)
+        // );
   }
-
-
 }
