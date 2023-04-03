@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Machine } from 'src/app/interfaces/Machine';
 import { MachineDetail } from 'src/app/interfaces/MachineDetail';
@@ -22,9 +22,15 @@ export class TileComponent implements OnInit {
 
   //  machine list gets called once then creates a loop of component passing id which will be used to get machineDetail from service
   @Input() id!: number;   // receive id from parent component (app.component).
+  @Output() popup = new EventEmitter<string>();
+
 
   toggleOnline(machineId:number, status:boolean){
-    this.machinesService.toggleMachineStatus(machineId, status).subscribe(result => console.log('risultato patch request', result))
+    this.machinesService.toggleMachineStatus(machineId, status).subscribe(result => {
+      if (result.code === 200){
+        this.popup.emit(result.message)
+      }
+    })
 
   }
 
