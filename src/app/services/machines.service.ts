@@ -40,7 +40,7 @@ export class MachinesService {
   }
 
   // presa dalla documentazione ufficiale Angular
-  private handleFetchError(error: HttpErrorResponse){
+  private handleFetchError(error: HttpErrorResponse): Observable<any>{
     // client side or network error
     if (error.status === 0){
       console.log('errore in put', error.error)
@@ -52,10 +52,10 @@ export class MachinesService {
     return throwError(() => new Error('Richiesta non eseguita; Riprovare'))
   }
 
-  // TODO FIX THIS!!!
-  toggleMachineStatus(machineId:number): Observable<any>{
-    // change body of request
-    return this.http.put(this.machineListUrl + `/${machineId}`, {machine: machineId}, httpOptions).pipe(retry(3), catchError(this.handleFetchError('update status', machineId)))
+  // from tile component get machine Id and reversed status to patch to backend
+  toggleMachineStatus(machineId:number, status:boolean): Observable<any>{
+    // TODO control body of request
+    return this.http.put(this.machineListUrl + `/${machineId}`, {online: status}, httpOptions).pipe(retry(3), catchError(this.handleFetchError))
   }
 
 
