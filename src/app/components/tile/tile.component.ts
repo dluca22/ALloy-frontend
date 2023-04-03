@@ -24,8 +24,7 @@ export class TileComponent implements OnInit {
   @Input() id!: number;   // receive id from parent component (app.component).
 
   toggleOnline(machineId:number, status:boolean){
-    console.log(machineId, status)
-    // this.machinesService.toggleMachineStatus(machineId, status)
+    this.machinesService.toggleMachineStatus(machineId, status).subscribe(result => console.log('risultato patch request', result))
 
   }
 
@@ -44,7 +43,7 @@ export class TileComponent implements OnInit {
     // this.machinesService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
     this.machinesService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine
-      console.log(this.machineDetail)
+      // console.log(this.machineDetail)
       this.getLiveStatistics(this.machineDetail.name)
     })
 

@@ -55,7 +55,9 @@ export class MachinesService {
   // from tile component get machine Id and reversed status to patch to backend
   toggleMachineStatus(machineId:number, status:boolean): Observable<any>{
     // TODO control body of request
-    return this.http.put(this.machineListUrl + `/${machineId}`, {online: status}, httpOptions).pipe(retry(3), catchError(this.handleFetchError))
+    console.log("partito servizio fetch");
+
+    return this.http.patch(this.machineListUrl + `/${machineId}`, {online: status}, httpOptions).pipe(catchError(this.handleFetchError))
   }
 
 
