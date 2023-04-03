@@ -8,6 +8,9 @@ v 0.5
 * si collega al web socket del backend per ottenere dati live dal backend
 * manda una patch request per invertire status online/offline
 
+### Urgente!!:
+* aggiornare UI e "refresh" della UI per aggiornare lo status della macchina appena accesa/spenta
+
 ### In lavorazione:
 * gestire il messaggio di return del server chiamando un altro componente "popup" che dovrebbe flashare il messaggio a schermo ed autodistruggersi.
 * aggiungere error handling alla chiamata di .patch()
@@ -23,4 +26,4 @@ v 0.5
 ### Roadmap MVP:
 * v 1: display di tutti i reparti e toggling on/off machines + popup messages delle fetch request + error handling
 * v 2: Aggiunta delle pagine per tabelle "downtime", "maintenance" e "alerts"
-* v 3: aggiunta di grafici per display dati 
+* v 3: aggiunta di grafici per display dati
