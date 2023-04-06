@@ -15,7 +15,6 @@ import { SocketUpdatesService } from './services/socket-updates.service';
 })
 export class AppComponent implements OnInit {
   machineList!: Machine[] | [];
-  socketData?: string;
   altro?: number | string
 
 
@@ -23,11 +22,6 @@ export class AppComponent implements OnInit {
     this.machinesService.getMachineList().subscribe(result => this.machineList = result)
 
 
-    // this.socket.on('data', (data:any) => {this.socketData = data.randomNum as string});
-    // this.socketUpdateService.getData().subscribe(data => {
-    //   console.log('Data received:', data);
-    //   this.socketData = data
-    // });
   }
 
   constructor(private machinesService: MachinesService, private socket: Socket, private socketUpdateService: SocketUpdatesService) { }

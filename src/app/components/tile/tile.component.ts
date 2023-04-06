@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Machine } from 'src/app/interfaces/Machine';
 import { MachineDetail } from 'src/app/interfaces/MachineDetail';
 import { MachinesService } from 'src/app/services/machines.service';
@@ -19,24 +19,33 @@ export class TileComponent implements OnInit {
   machineTemperature?: number;
   machinePressure?: number;
   machineFlowRate?: number;
+  liveDataSubscription: Subscription | undefined
 
   //  machine list gets called once then creates a loop of component passing id which will be used to get machineDetail from service
   @Input() id!: number;   // receive id from parent component (app.component).
   @Output() popup = new EventEmitter<string>();
 
 
-  toggleOnline(machineId:number, status:boolean){
-    this.machinesService.toggleMachineStatus(machineId, status).subscribe(result => {
-      if (result.code === 200){
-        this.popup.emit(result.message)
-      }
-    })
-
+  toggleOnline(machineId: number, status: boolean) {
+    this.machinesService.toggleMachineStatus(machineId, status).subscribe(
+      result => {
+        if (result.code === 200) {
+          console.log("test", result)
+          // this.popup.emit(result.message) // trigger popup with message of result
+          // call loadData again to update the tile
+          // TODO remake a fetch request or reload the machine query in the backend because keeps emitting values
+          this.loadData()
+        }
+      },
+      error => {
+        // this.popup.emit(error) // trigger popup with message of result
+        console.log("error response from toggleOnline")
+      })
   }
 
-  getLiveStatistics(machineName :string): void{
-    if(this.machineDetail){
-      this.socketUpdateService.getLiveData(machineName).subscribe(result => {
+  getLiveStatistics(machineName: string): void {
+    if (this.machineDetail && this.machineDetail.online) {
+      this.liveDataSubscription = this.socketUpdateService.getLiveData(machineName).subscribe(result => {
         this.machineTemperature = result.temperature;
         this.machinePressure = result.pressure;
         this.machineFlowRate = result.flow_rate;
@@ -44,17 +53,18 @@ export class TileComponent implements OnInit {
     }
   }
 
-
-  ngOnInit(): void {
-    // this.machinesService.getMachineDetail(this.id).subscribe(res => this.machineDetail = res)
+  // reusable function that fetches new data from backend either at onInit or after toggleOnline
+  loadData(): void {
     this.machinesService.getMachineDetail(this.id).subscribe(machine => {
       this.machineDetail = machine
       // console.log(this.machineDetail)
       this.getLiveStatistics(this.machineDetail.name)
     })
+  }
 
-
-
+  ngOnInit(): void {
+    // on component  init, start the loadData function
+    this.loadData()
   }
   constructor(private machinesService: MachinesService, private socketUpdateService: SocketUpdatesService) { }
 }
