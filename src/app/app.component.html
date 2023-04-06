@@ -7,13 +7,13 @@
 <div class="body-content">
     <app-sidebar [machineList]="machineList"></app-sidebar>
     <main>
-        
+
         <div class="machine-detail-area">
 
             <ng-container *ngIf="machineList; else errorBlock">
 
                 <ng-container *ngFor="let machine of machineList">
-                    <app-tile [id]="machine.id"></app-tile>
+                    <app-tile (refreshData)="handleDataRefresh()" [id]="machine.id"></app-tile>
                 </ng-container>
             </ng-container>
 

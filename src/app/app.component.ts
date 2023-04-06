@@ -17,11 +17,20 @@ export class AppComponent implements OnInit {
   machineList!: Machine[] | [];
   altro?: number | string
 
+  fetchMachineData(){
+    this.machinesService.getMachineList().subscribe(result => this.machineList = result)
+  }
+
+  // does not work as intended with the fetch request, but works if i assign arbitrary values
+  handleDataRefresh(){
+    // this.machinesService.getMachineList().subscribe(result => this.machineList = result) // not working
+
+    this.machineList = [{id: 1, name: 'FAKE', sector: 1, online: 1}, {id: 1, name: 'FAKE2', sector: 1, online: 1}]
+
+  }
 
   ngOnInit(): void {
-    this.machinesService.getMachineList().subscribe(result => this.machineList = result)
-
-
+    this.fetchMachineData()
   }
 
   constructor(private machinesService: MachinesService, private socket: Socket, private socketUpdateService: SocketUpdatesService) { }

@@ -33,6 +33,8 @@ export class SocketUpdatesService {
         // );
   }
 
+
+  // sends message to backend to force refresh machines=== online from database for emitting data
   changeSocketMachineStatus(): void{
     this.socket.emit('patchStatus')
   }

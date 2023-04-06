@@ -24,7 +24,7 @@ export class TileComponent implements OnInit {
   //  machine list gets called once then creates a loop of component passing id which will be used to get machineDetail from service
   @Input() id!: number;   // receive id from parent component (app.component).
   @Output() popup = new EventEmitter<string>();
-
+  @Output() refreshData = new EventEmitter()
 
 
   toggleOnline(machineId: number, status: boolean) {
@@ -32,14 +32,21 @@ export class TileComponent implements OnInit {
       result => {
         if (result.code === 200) {
           console.log("test", result)
-          this.popup.emit(result.message) // trigger popup with message of result
+          this.popup.emit(result.message) // TODO trigger popup with message of result
           this.loadData() // call loadData again to update the tile
-          this.socketUpdateService.changeSocketMachineStatus()
-          
+          this.socketUpdateService.changeSocketMachineStatus() // send to backend for refreshing database of machines that emit data
+
+          // unsubscribe from this data stream if trying to shut down machine ???????
+          if(status === false){
+            this.liveDataSubscription?.unsubscribe
+          }
+
+          this.refreshData.emit()
+          // this.refreshData.emit(this.machineDetail)
         }
       },
       error => {
-        // this.popup.emit(error) // trigger popup with message of result
+        this.popup.emit(error) // trigger popup with message of result
         console.log("error response from toggleOnline")
       })
   }

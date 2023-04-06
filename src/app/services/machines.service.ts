@@ -45,7 +45,7 @@ export class MachinesService {
   private handleFetchError(error: HttpErrorResponse): Observable<any> {
     // client or backend are offline, no network connection
     if (error.status === 0) {
-      console.error('Errore di connessione; error status: 0')
+      console.warn('Errore di connessione; error status: 0')
     } else {
       // TODO test this
       // call was successful but backend responded with unsuccessful
@@ -58,7 +58,6 @@ export class MachinesService {
 
   // from tile component get machine Id and reversed status to patch to backend
   toggleMachineStatus(machineId: number, status: boolean): Observable<any> {
-    console.log("partito servizio toggleMachineStatus");
 
     return this.http.patch(this.machineListUrl + `/${machineId}`, { online: status }, httpOptions).pipe(catchError(this.handleFetchError))
   }
