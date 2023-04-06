@@ -1,15 +1,19 @@
 # ALloyFrontend
 
 ## Current Release:
-v 0.5
+v 0.6
 ### Fatto:
 * Sidebar tiene in elenco tutte le macchine presenti e divise in base a online/offline status
 * Richiede fetching dei dati dal backend di macchine e parametri funzionali della macchina e crea "tile" per ogniuna con tabella dati
 * si collega al web socket del backend per ottenere dati live dal backend
 * manda una patch request per invertire status online/offline
+* aggiornare UI e "refresh" della UI per aggiornare lo status della macchina appena accesa/spenta
+    * in tile.html se machine == online, mostra "liveData", altrimenti "--"
+    * mostra (on)/(off) condizionalmente
+* manda messaggio al socket per forzare una re-query del database dopo aver acceso/spento stato macchina
 
 ### Urgente!!:
-* aggiornare UI e "refresh" della UI per aggiornare lo status della macchina appena accesa/spenta
+* aggiornare lista in sidebar quando viene cambiato status macchine
 
 ### In lavorazione:
 * gestire il messaggio di return del server chiamando un altro componente "popup" che dovrebbe flashare il messaggio a schermo ed autodistruggersi.

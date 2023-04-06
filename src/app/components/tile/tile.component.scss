@@ -9,13 +9,53 @@
   border: 2px solid $accent;
   display: flex;
   flex-direction: column;
+  position: relative;
+  opacity: 80%;
 
+
+  &.online{
+    border-color: green;
+    opacity: 100%;
+  }
+
+  .status-accent{
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 7px;
+    &.online{
+      background-color: rgb(16, 113, 16);
+    }
+    &.offline{
+      background-color: rgb(208, 10, 10);
+    }
+  }
   // Add table styles
   h2 {
     text-align: center;
     margin-bottom: 1rem;
   }
 
+  .toggle-status-btn{
+    position:absolute;
+    right:3px;
+    top:3px;
+    display:flex;
+    margin-inline: auto;
+    font-size: 0.7rem;
+    padding:4px;
+    border:none;
+    border-radius:3px;
+    background: black;
+    color:white;
+    font-weight: bold;
+    &.offline{
+      background-color: $accent;
+
+    }
+  }
   table {
     width: 100%; // Set table width to 100% of the container
     border-collapse: collapse; // Collapse table borders

@@ -26,16 +26,16 @@ export class TileComponent implements OnInit {
   @Output() popup = new EventEmitter<string>();
 
 
+
   toggleOnline(machineId: number, status: boolean) {
     this.machinesService.toggleMachineStatus(machineId, status).subscribe(
       result => {
         if (result.code === 200) {
           console.log("test", result)
-          // this.popup.emit(result.message) // trigger popup with message of result
-          // call loadData again to update the tile
-          // TODO remake a fetch request or reload the machine query in the backend because keeps emitting values
-          this.loadData()
+          this.popup.emit(result.message) // trigger popup with message of result
+          this.loadData() // call loadData again to update the tile
           this.socketUpdateService.changeSocketMachineStatus()
+          
         }
       },
       error => {
@@ -44,6 +44,7 @@ export class TileComponent implements OnInit {
       })
   }
 
+  // calls service to listen to subscribe to live data emission, the observable updates the values real time
   getLiveStatistics(machineName: string): void {
     if (this.machineDetail && this.machineDetail.online) {
       this.liveDataSubscription = this.socketUpdateService.getLiveData(machineName).subscribe(result => {

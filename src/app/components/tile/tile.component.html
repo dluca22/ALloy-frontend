@@ -1,13 +1,13 @@
 <!--  general tile structure -->
 
-<div class="tile-container" *ngIf="machineDetail">
-        <h2>{{machineDetail.name | titlecase}} <span>({{machineDetail.online ? "on" : "off"}})</span></h2>
-
+<div class="tile-container" [ngClass]="{'online' :machineDetail.online}" *ngIf="machineDetail">
+    <div class="status-accent" [ngClass]="machineDetail.online ? 'online' : 'offline'"></div>
+        <h2>{{machineDetail.name | titlecase}}</h2>
         <ng-container *ngIf="machineDetail.online; else turnOnButton">
-            <button (click)="toggleOnline(machineDetail.machine_id, !machineDetail.online)">Turn Off</button>
+            <button class="toggle-status-btn online" (click)="toggleOnline(machineDetail.machine_id, !machineDetail.online)">Turn Off</button>
         </ng-container>
         <ng-template #turnOnButton>
-            <button (click)="toggleOnline(machineDetail.machine_id, !machineDetail.online)">Turn On</button>
+            <button class="toggle-status-btn offline" (click)="toggleOnline(machineDetail.machine_id, !machineDetail.online)">Turn On</button>
         </ng-template>
 
 
