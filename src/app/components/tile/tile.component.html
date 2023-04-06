@@ -1,7 +1,7 @@
 <!--  general tile structure -->
 
 <div class="tile-container" *ngIf="machineDetail">
-        <h2>{{machineDetail.name | titlecase}}</h2>
+        <h2>{{machineDetail.name | titlecase}} <span>({{machineDetail.online ? "on" : "off"}})</span></h2>
 
         <ng-container *ngIf="machineDetail.online; else turnOnButton">
             <button (click)="toggleOnline(machineDetail.machine_id, !machineDetail.online)">Turn Off</button>
@@ -26,19 +26,19 @@
             <tbody>
                 <tr>
                     <td class="row-title">Pressione</td>
-                    <td class="live-data-column">{{machinePressure}}</td>
+                    <td class="live-data-column">{{machineDetail.online ? machinePressure : "--"}}</td>
                     <td class="target-value-column">{{machineDetail.min_pressure}} ~ {{machineDetail.max_pressure}}</td>
                     <td class="unit-column">{{machineDetail.pressure_unit}}</td>
                 </tr>
                 <tr>
                     <td class="row-title">Temperatura</td>
-                    <td class="live-data-column">{{machineTemperature}}</td>
+                    <td class="live-data-column">{{machineDetail.online ? machineTemperature : "--"}}</td>
                     <td class="target-value-column">{{machineDetail.min_temp}} ~ {{machineDetail.max_temp}}</td>
                     <td class="unit-column">°C</td>
                 </tr>
                 <tr>
                     <td class="row-title">Flow Rate</td>
-                    <td class="live-data-column">{{machineFlowRate}}</td>
+                    <td class="live-data-column">{{machineDetail.online ? machineFlowRate : "--"}}</td>
                     <td class="target-value-column">{{machineDetail.flow_rate}}</td>
                     <td class="unit-column">{{machineDetail.flow_rate_unit}}</td>
                 </tr>

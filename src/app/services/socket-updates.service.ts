@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { Observable, fromEvent, map, tap } from 'rxjs';
+import { Observable, map } from 'rxjs';
 
 
 interface MachineLiveData {
@@ -18,8 +18,7 @@ export class SocketUpdatesService {
   constructor(private socket: Socket) { }
 
   getLiveData(name: string): Observable<MachineLiveData> {
-
-    // inferring data type into the fromEvent operator so pipe and map can know 
+    // inferring data type into the fromEvent operator so pipe and map can know
     return this.socket.fromEvent<MachineLiveData>(name).pipe(
       map((data) => data)
     );
@@ -32,5 +31,9 @@ export class SocketUpdatesService {
         //   tap((data) => console.log(`Data received from socket: ${JSON.stringify(data)}`)),
         //   map((data: any) => data)
         // );
+  }
+
+  changeSocketMachineStatus(): void{
+    this.socket.emit('patchStatus')
   }
 }

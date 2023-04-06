@@ -35,6 +35,7 @@ export class TileComponent implements OnInit {
           // call loadData again to update the tile
           // TODO remake a fetch request or reload the machine query in the backend because keeps emitting values
           this.loadData()
+          this.socketUpdateService.changeSocketMachineStatus()
         }
       },
       error => {
