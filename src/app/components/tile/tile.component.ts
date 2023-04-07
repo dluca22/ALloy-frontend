@@ -2,6 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Outpu
 import { Observable, Subscription } from 'rxjs';
 import { Machine } from 'src/app/interfaces/Machine';
 import { MachineDetail } from 'src/app/interfaces/MachineDetail';
+import { MessageBroadcastService } from 'src/app/message-broadcast.service';
 import { MachinesService } from 'src/app/services/machines.service';
 import { SocketUpdatesService } from 'src/app/services/socket-updates.service';
 
@@ -31,10 +32,12 @@ export class TileComponent implements OnInit {
     this.machinesService.toggleMachineStatus(machineId, status).subscribe(
       result => {
         if (result.code === 200) {
-          console.log("test", result)
-          this.popup.emit(result.message) // TODO trigger popup with message of result
+          console.log("test quiaaaa", result.message)
           this.loadData() // call loadData again to update the tile
           this.socketUpdateService.changeSocketMachineStatus() // send to backend for refreshing database of machines that emit data
+          // this.popup.emit(result.message) // TODO trigger popup with message of result
+
+          this.messageBroadcast.castMessage(result.message)
 
           // unsubscribe from this data stream if trying to shut down machine ???????
           if(status === false){
@@ -75,5 +78,7 @@ export class TileComponent implements OnInit {
     // on component  init, start the loadData function
     this.loadData()
   }
-  constructor(private machinesService: MachinesService, private socketUpdateService: SocketUpdatesService) { }
+  constructor(private machinesService: MachinesService,
+        private socketUpdateService: SocketUpdatesService,
+        private messageBroadcast: MessageBroadcastService) { }
 }
