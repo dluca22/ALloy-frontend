@@ -41,7 +41,7 @@ export class TileComponent implements OnInit {
             this.liveDataSubscription?.unsubscribe
           }
 
-          this.refreshData.emit()
+          this.refreshData.emit(machineId)
           // this.refreshData.emit(this.machineDetail)
         }
       },

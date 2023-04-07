@@ -26,6 +26,7 @@ export class MachinesService {
 
   // FIX this observable return
   getMachineList(): Observable<Machine[]> {
+    console.log("parte")
     if (this.machineList.length === 0) {
       return this.http.get<Machine[]>(this.machineListUrl)
         .pipe(map(machines => {

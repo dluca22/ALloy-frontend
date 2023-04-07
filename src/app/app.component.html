@@ -13,7 +13,7 @@
             <ng-container *ngIf="machineList; else errorBlock">
 
                 <ng-container *ngFor="let machine of machineList">
-                    <app-tile (refreshData)="handleDataRefresh()" [id]="machine.id"></app-tile>
+                    <app-tile (refreshData)="handleDataRefresh(machine.id)" [id]="machine.id"></app-tile>
                 </ng-container>
             </ng-container>
 
