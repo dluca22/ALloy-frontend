@@ -6,7 +6,7 @@
         <ng-container *ngIf="machineList; else errorBlock">
         <div class="machine-status-group">
 
-                <h5>Online <span>( {{totalOnline}} / {{machineList.length}} )</span></h5>
+                <h5>Online <span>( {{countOnline}} / {{machineList.length}} )</span></h5>
                 <ul *ngFor="let machine of machineList">
 
                     <ng-container *ngIf="machine.online ">
@@ -15,7 +15,7 @@
                 </ul>
             </div>
             <div class="machine-status-group">
-                <h5>Offline <span> ( {{totalOffline}}/ {{machineList.length}})</span></h5>
+                <h5>Offline <span> ( {{countOffline}}/ {{machineList.length}})</span></h5>
                 <ul *ngFor="let machine of machineList">
                     <ng-container *ngIf="!machine.online">
                         <li>{{machine.name}} </li>

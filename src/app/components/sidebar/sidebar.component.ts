@@ -14,10 +14,10 @@ import { Machine } from 'src/app/interfaces/Machine';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnChanges, OnInit{
+export class SidebarComponent implements OnChanges{
 
-  totalOnline?:number
-  totalOffline?:number
+  countOnline?:number
+  countOffline?:number
 
   @Input() machineList!:Machine[]
 
@@ -30,14 +30,12 @@ export class SidebarComponent implements OnChanges, OnInit{
     if (changes['machineList']){
       this.machineList = changes['machineList'].currentValue
     }
+    // upon receiving data from parent, counts online & offline values
+    this.countOffline = this.machineList.filter(machine => !machine.online).length
+    this.countOnline = this.machineList.filter(machine => machine.online).length
   }
 
-  ngOnInit(): void {
 
-    console.log("chiamato")
-    this.totalOffline = this.machineList.filter(machine => !machine.online).length
-    this.totalOnline = this.machineList.filter(machine => machine.online).length
-  }
 
   constructor(private machinesService: MachinesService) {}
 }

@@ -25,6 +25,7 @@ export class MachinesService {
 
 
   // FIX this observable return
+  // -- error -- chiamando questo metodo ancora dopo patch update, cercando di forzare una nuova chiamata al backend, per come  è impostato ora, siccome c'è il conditional check e machineList non è un array vuoto, evita di fare un nuovo fetching ma invece fornisce i dati già salvati in memoria.
   getMachineList(): Observable<Machine[]> {
     console.log("parte")
     if (this.machineList.length === 0) {
