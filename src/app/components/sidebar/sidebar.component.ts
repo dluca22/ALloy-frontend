@@ -14,28 +14,30 @@ import { Machine } from 'src/app/interfaces/Machine';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnChanges{
+export class SidebarComponent implements OnChanges {
 
-  countOnline?:number
-  countOffline?:number
+  countOnline?: number
+  countOffline?: number
 
-  @Input() machineList!:Machine[]
+  @Input() machineList!: Machine[]
 
 
-// ngOnChanges non serve in quanto i cambiamenti di machineList in handleDataRefresh vengono rispecchiati correttamente
-// pero il console log viene chiamato correttamente a seguito dei cambiamenti
-// tengo questa funzione in modo da poter collegare altra logica in futuro o se voglio mettere qualche altra animazione al cambiamento dell'array tipo counter
+  // ngOnChanges non serve in quanto i cambiamenti di machineList in handleDataRefresh vengono rispecchiati correttamente
+  // pero il console log viene chiamato correttamente a seguito dei cambiamenti
+  // tengo questa funzione in modo da poter collegare altra logica in futuro o se voglio mettere qualche altra animazione al cambiamento dell'array tipo counter
   ngOnChanges(changes: SimpleChanges): void {
     console.log("ngOnChanges funziona")
-    if (changes['machineList']){
+    if (changes['machineList']) {
       this.machineList = changes['machineList'].currentValue
     }
-    // upon receiving data from parent, counts online & offline values
-    this.countOffline = this.machineList.filter(machine => !machine.online).length
-    this.countOnline = this.machineList.filter(machine => machine.online).length
+    // upon receiving and ONLY AFTER RECEIVING data from parent, counts online & offline values
+    if (this.machineList) {
+      this.countOffline = this.machineList.filter(machine => !machine.online).length
+      this.countOnline = this.machineList.filter(machine => machine.online).length
+    }
   }
 
 
 
-  constructor(private machinesService: MachinesService) {}
+  constructor(private machinesService: MachinesService) { }
 }
