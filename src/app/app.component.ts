@@ -15,41 +15,38 @@ import { SocketUpdatesService } from './services/socket-updates.service';
 })
 export class AppComponent implements OnInit {
   machineList!: Machine[] | [];
-  altro?: number | string
+  test?: boolean
 
-  fetchMachineData(){
+
+
+  fetchMachineData() {
     this.machinesService.getMachineList().subscribe(result => this.machineList = result)
+
   }
 
 
   // does not work as intended with the fetch request, but works if i assign arbitrary values
-  handleDataRefresh(id:number){
+  handleDataRefresh(id: number) {
 
-   // ------ queste due partono davvero ma non vengono elaboate correttamente -----
-   // this.machinesService.getMachineList().subscribe(result => this.machineList = result) // not working
-   // this.fetchMachineData();
-   // ------------ ======================   ------------------
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // map non modifica l'array precedente, ritorna un nuovo array
+    // se non lo assegni...non funziona
+        this.machineList = this.machineList.map(machine => {
 
-
-   // -----------  altra prova -----------------------------
-   // Prova a modificare la lista di machines in base all'id del EventEmitter, in modo da fare loop over l'array ed invertire il valore di .online in base all'id della macchina (solo quando fetch request è 200), ma non funziona...
-   // probabilmente il valore viene modificato in app.component ma non viene comunicato al component sidebar
-
-   // non capisco però perche se invece uso il comando sotto in cui do io un valore arbitrario inventato, li modifica per davvero sia in app component, che nei children
-   // this.machineList.map(machine => {
-     //   (machine.id === id) ?
-     //     {...machine,
-     //     online : !machine.online
-     //   }
-     //   : machine
-     // })
-     // ------------ ======================   ------------------
-
-
-    // --------------- prova con valori arbitrari e sembra funzionare, ma non capisco perche --------------------- 
-     // this.machineList = [{id: 1, name: 'FAKE', sector: 1, online: 1}, {id: 1, name: 'FAKE2', sector: 1, online: 1}]
-     // ------------ ======================   ------------------
-
+      if (machine.id === id) {
+        return {
+          ...machine,
+          online: !machine.online
+        }
+      }
+      return machine
+    })
   }
 
   ngOnInit(): void {

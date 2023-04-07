@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MachinesService } from 'src/app/services/machines.service';
 import { Machine } from 'src/app/interfaces/Machine';
@@ -14,16 +14,30 @@ import { Machine } from 'src/app/interfaces/Machine';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
-  // machineList!: Machine[] | [];
+export class SidebarComponent implements OnChanges, OnInit{
+
+  totalOnline?:number
+  totalOffline?:number
 
   @Input() machineList!:Machine[]
 
+
+// ngOnChanges non serve in quanto i cambiamenti di machineList in handleDataRefresh vengono rispecchiati correttamente
+// pero il console log viene chiamato correttamente a seguito dei cambiamenti
+// tengo questa funzione in modo da poter collegare altra logica in futuro o se voglio mettere qualche altra animazione al cambiamento dell'array tipo counter
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log("ngOnChanges funziona")
+    if (changes['machineList']){
+      this.machineList = changes['machineList'].currentValue
+    }
+  }
+
+  ngOnInit(): void {
+
+    console.log("chiamato")
+    this.totalOffline = this.machineList.filter(machine => !machine.online).length
+    this.totalOnline = this.machineList.filter(machine => machine.online).length
+  }
+
   constructor(private machinesService: MachinesService) {}
-
-  // ngOnInit(): void {
-  //   // on initializing calls this machinesService method imported from machines.service
-  // this.machinesService.getMachineList().subscribe(result => this.machineList = result)
-  // }
-
 }
