@@ -26,7 +26,6 @@ export class SidebarComponent implements OnChanges {
   // pero il console log viene chiamato correttamente a seguito dei cambiamenti
   // tengo questa funzione in modo da poter collegare altra logica in futuro o se voglio mettere qualche altra animazione al cambiamento dell'array tipo counter
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("ngOnChanges funziona")
     if (changes['machineList']) {
       this.machineList = changes['machineList'].currentValue
     }

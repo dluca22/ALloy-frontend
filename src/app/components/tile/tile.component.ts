@@ -32,12 +32,11 @@ export class TileComponent implements OnInit {
     this.machinesService.toggleMachineStatus(machineId, status).subscribe(
       result => {
         if (result.code === 200) {
-          console.log("test quiaaaa", result.message)
           this.loadData() // call loadData again to update the tile
           this.socketUpdateService.changeSocketMachineStatus() // send to backend for refreshing database of machines that emit data
           // this.popup.emit(result.message) // TODO trigger popup with message of result
 
-          this.messageBroadcast.castMessage(result.message)
+          this.messageBroadcast.castMessage({text:result.message, color:"green"})
 
           // unsubscribe from this data stream if trying to shut down machine ???????
           if(status === false){
@@ -68,15 +67,27 @@ export class TileComponent implements OnInit {
   // reusable function that fetches new data from backend either at onInit or after toggleOnline
   loadData(): void {
     this.machinesService.getMachineDetail(this.id).subscribe(machine => {
+      // assign the value received from service observable
       this.machineDetail = machine
-      // console.log(this.machineDetail)
+
+      // start listening for socket messages for this machine
       this.getLiveStatistics(this.machineDetail.name)
+
+
+      //test
+      // if(this.machineDetail && this.machineDetail.name === "forno"){
+      //   console.log("PROVA TEST")
+      //   this.messageBroadcast.castMessage({text:"test message", color:"blue"})
+      // }
     })
   }
 
   ngOnInit(): void {
     // on component  init, start the loadData function
     this.loadData()
+    // this.messageBroadcast.castMessage({text:"test message", color:"blue"})
+
+
   }
   constructor(private machinesService: MachinesService,
         private socketUpdateService: SocketUpdatesService,

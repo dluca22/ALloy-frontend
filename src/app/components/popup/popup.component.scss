@@ -1,0 +1,25 @@
+
+.popup-message{
+    position: absolute;
+    bottom:15px;
+    right:15px;
+    border: 1px solid #2a2a2a;
+    border-bottom: 2px solid #2a2a2a;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    min-width: 200px;
+    border-radius: 2px;
+}
+
+.message-text{
+    padding-inline:20px;
+    width: 90%;
+    display: flex;
+    justify-content: center;
+    margin-inline-start: auto;
+}
+.accent-color{
+    width: 12px;
+    height: 100%;
+}

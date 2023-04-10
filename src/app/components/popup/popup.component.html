@@ -1,3 +1,8 @@
-<ng-container *ngIf="message">
-    <div class="popup-message">{{message}}</div>
+<!--  temporaneamente > 1 in quanto behavioursubject ha come default value un empty object, e devo vedere se tenerlo così oppure implementare null come possiblie valore dell'array messages -->
+<ng-container *ngIf="messages.length > 1">
+    <div class="popup-message" *ngFor="let message of messages">
+
+        <span class="accent-color" [ngStyle]="{'background-color': message.color}"></span>
+        <span class="message-text">{{message.text}}</span>
+    </div>
 </ng-container>
